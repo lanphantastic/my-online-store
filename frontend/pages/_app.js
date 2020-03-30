@@ -1,19 +1,33 @@
 import App, { Container } from 'next/app';
 import Page from '../components/Page';
+import { ApolloProvider } from 'react-apollo';
+import withData from '../lib/withData';
 
 class MyApp extends App {
-  render() {
-    const { Component } = this.props;
+	// getInitialProps is a special funciton nextJS that runs first before the render
+	static async getInitialProps({ Component, ctx }) {
+		let pageProps = {};
+		if (Component.getInitialProps) {
+			pageProps = await Component.getInitialProps(ctx);
+		}
+		// this exposes the query to the user
+		pageProps.query = ctx.query;
+		return { pageProps };
+	}
+	render() {
+		const { Component, apollo, pageProps } = this.props;
 
-    return (
-      <Container>
-        <Page>
-          <Component />
-          {/* Component above will either home, or sell page, etc. that we are on */}
-        </Page>
-      </Container>
-    )
-  }
+		return (
+			<Container>
+				<ApolloProvider client={apollo}>
+					<Page>
+						<Component {...pageProps} />
+						{/* Component above will either home, or sell page, etc. that we are on */}
+					</Page>
+				</ApolloProvider>
+			</Container>
+		);
+	}
 }
 
-export default MyApp;
+export default withData(MyApp);
