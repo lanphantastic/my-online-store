@@ -328,7 +328,7 @@ const Nav = () => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.crea
     lineNumber: 7,
     columnNumber: 7
   }
-}, "Items")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+}, "Shop")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
   href: "/sell",
   __self: undefined,
   __source: {
