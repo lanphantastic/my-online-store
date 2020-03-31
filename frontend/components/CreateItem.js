@@ -8,23 +8,23 @@ import formatMoney from '../lib/formatMoney';
 import Error from './ErrorMessage';
 
 const CREATE_ITEM_MUTATION = gql`
-  mutation CREATE_ITEM_MUTATION(
-    $title: String!
-    $description: String!
-    $price: Int!
-    $image: String
-    $largeImage: String
-  ) {
-    createItem(
-      title: $title
-      description: $description
-      price: $price
-      image: $image
-      largeImage: $largeImage
-    ) {
-      id
-    }
-  }
+	mutation CREATE_ITEM_MUTATION(
+		$title: String!
+		$description: String!
+		$price: Int!
+		$image: String
+		$largeImage: String
+	) {
+		createItem(
+			title: $title
+			description: $description
+			price: $price
+			image: $image
+			largeImage: $largeImage
+		) {
+			id
+		}
+	}
 `;
 
 class CreateItem extends Component {
@@ -95,7 +95,7 @@ class CreateItem extends Component {
 									onChange={this.uploadFile}
 								/>
 							</label>
-              {image && <img src={image} width="200" alt="upload preview" />}
+							{image && <img src={image} width="200" alt="upload preview" />}
 							<label htmlFor="title">
 								Title
 								<input
