@@ -24,7 +24,10 @@ class CreateItem extends Component {
 	render() {
 		const { title, description, image, largeImage, price } = this.state;
 		return (
-			<Form>
+			<Form onSubmit={(e) => {
+        e.preventDefault();
+        
+      }}>
 				<fieldset>
 					<label htmlFor="title">
 						Title
