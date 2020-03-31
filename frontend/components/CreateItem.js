@@ -95,6 +95,7 @@ class CreateItem extends Component {
 									onChange={this.uploadFile}
 								/>
 							</label>
+              {image && <img src={image} width="200" alt="upload preview" />}
 							<label htmlFor="title">
 								Title
 								<input
