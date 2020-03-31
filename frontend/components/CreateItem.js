@@ -8,24 +8,23 @@ import formatMoney from '../lib/formatMoney';
 import Error from './ErrorMessage';
 
 const CREATE_ITEM_MUTATION = gql`
-	mutation CREATE_ITEM_MUTATION(
-		$title: String!
-		$description: String!
-		$price: Int!
-		$image: String
-		$largeImage: String
-	) {
-		createItem(
-			title: $title
-			description: $description
-			price: $price
-			image: $image
-			largeImage: $largeImage
-		) {
-			id
-			title
-		}
-	}
+  mutation CREATE_ITEM_MUTATION(
+    $title: String!
+    $description: String!
+    $price: Int!
+    $image: String
+    $largeImage: String
+  ) {
+    createItem(
+      title: $title
+      description: $description
+      price: $price
+      image: $image
+      largeImage: $largeImage
+    ) {
+      id
+    }
+  }
 `;
 
 class CreateItem extends Component {
@@ -59,7 +58,6 @@ class CreateItem extends Component {
 			}
 		);
 		const file = await response.json();
-		console.log(file);
 		this.setState({
 			image: file.secure_url,
 			largeImage: file.eager[0].secure_url
