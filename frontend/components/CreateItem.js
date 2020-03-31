@@ -43,7 +43,26 @@ class CreateItem extends Component {
 		this.setState({
 			[name]: val
 		});
-	};
+  };
+  
+  uploadFile = async e => {
+    const files = e.target.files;
+    const data = new FormData();
+    data.append('file', files[0]);
+    data.append('upload_preset', 'lan-sick-fits');
+
+    const response = await fetch('https://api.cloudinary.com/v1_1/lan-sick-fits/image/upload', {
+      method: 'POST',
+      body: data
+    });
+    const file = await response.json();
+    console.log(file);
+    this.setState({
+      image: file.secure_url,
+      largeImage: file.eager[0].secure_url
+    });
+
+  }
 
 	render() {
 		const { title, description, image, largeImage, price } = this.state;
