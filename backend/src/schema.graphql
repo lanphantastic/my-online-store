@@ -12,5 +12,6 @@ type Mutation {
 }
 
 type Query {
-  items: [Item]!
+	items: [Item]!
+  item(where: ItemWhereUniqueInput!): Item!
 }
