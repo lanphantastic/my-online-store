@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import styled from 'styled-components';
+import Head from 'next/head';
 
 import Error from './ErrorMessage';
 
@@ -39,7 +40,15 @@ class SingleItem extends Component {
           if (error) return <Error error={error} />;
           if (loading) return <p>Loading...</p>;
           if (!data.item) return <p>No Item Found for {this.props.id}</p>;
-          return <p>Single item component {this.props.id}</p>;
+          const item = data.item;
+          return (
+            <SingleItemStyle>
+              <Head>
+                <title>Sick Fits | {item.title}</title>
+              </Head>
+              <img src={item.largeImage} alt={item.title} />
+            </SingleItemStyle>
+          );
         }}
       </Query>
     );
