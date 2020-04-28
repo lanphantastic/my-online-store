@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const { randomBytes } = require('crypto');
 const { promisify } = require('util');
 
+const { hasPermission } = require('../utils');
 const { transport, makeANiceEmail } = require('../mail');
 
 const Mutations = {
@@ -17,8 +18,8 @@ const Mutations = {
           // This is how to create a relationship between the user and item
           user: {
             connect: {
-              id: context.request.userId
-            }
+              id: context.request.userId,
+            },
           },
           ...args,
         },
@@ -125,8 +126,7 @@ const Mutations = {
       subject: 'Your Password Reset Token',
       html: makeANiceEmail(`Your Password Reset Token is here!
       \n\n
-      <a href="${process.env
-        .FRONTEND_URL}/reset?resetToken=${resetToken}">Click Here to Reset</a>`),
+      <a href="${process.env.FRONTEND_URL}/reset?resetToken=${resetToken}">Click Here to Reset</a>`),
     });
 
     // 4. Return the message
@@ -169,6 +169,35 @@ const Mutations = {
     // 8. Return the new user
     return updatedUser;
     // 9. have a bubble tea
+  },
+  async updatePermissions(parent, args, context, info) {
+    // 1. check if they are logged in
+    if (!context.request.userId) {
+      throw new Error('You must be logged in');
+    }
+    // 2. Query the current user
+    const currentUser = await context.db.query.user(
+      {
+        where: {
+          id: context.request.userId,
+        },
+      },
+      info
+    );
+    // 3. Check if they have permissions to do this
+    hasPermission(currentUser, ['ADMIN', 'PERMISSIONUPDATE']);
+    // 4. Update the permissions
+    return context.db.mutation.updateUser(
+      {
+        data: {
+          permissions: {
+            set: args.permissions, // we use 'set' because permissions is its own ENUm
+          },
+        },
+        where: { id: args.userId },
+      },
+      info
+    );
   },
 };
 
