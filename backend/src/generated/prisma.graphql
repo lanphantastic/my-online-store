@@ -1,5 +1,5 @@
 # source: https://us1.prisma.sh/lan/my-online-store/dev
-# timestamp: Tue Apr 28 2020 20:32:11 GMT-0400 (Eastern Daylight Time)
+# timestamp: Tue Apr 28 2020 21:10:37 GMT-0400 (Eastern Daylight Time)
 
 type AggregateCartItem {
   count: Int!
@@ -23,6 +23,8 @@ type CartItem implements Node {
   quantity: Int!
   item: Item!
   user: User!
+  updatedAt: DateTime!
+  createdAt: DateTime!
 }
 
 """A connection to a list of items."""
@@ -67,11 +69,17 @@ enum CartItemOrderByInput {
   id_DESC
   quantity_ASC
   quantity_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
 }
 
 type CartItemPreviousValues {
   id: ID!
   quantity: Int!
+  updatedAt: DateTime!
+  createdAt: DateTime!
 }
 
 input CartItemScalarWhereInput {
@@ -145,6 +153,50 @@ input CartItemScalarWhereInput {
 
   """All values greater than or equal the given value."""
   quantity_gte: Int
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
 }
 
 type CartItemSubscriptionPayload {
@@ -304,6 +356,50 @@ input CartItemWhereInput {
 
   """All values greater than or equal the given value."""
   quantity_gte: Int
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
   item: ItemWhereInput
   user: UserWhereInput
 }
