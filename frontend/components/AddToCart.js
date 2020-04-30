@@ -24,7 +24,14 @@ class AddToCart extends React.Component {
         }}
         refetchQueries={[{ query: CURRENT_USER_QUERY }]}
       >
-        {addToCart => <button onClick={addToCart}>Add To Cart 🛒</button>}
+        {addToCart => (
+          <button onClick={addToCart}>
+            Add To Cart{' '}
+            <span role="img" aria-label="cart">
+              🛒
+            </span>
+          </button>
+        )}
       </Mutation>
     );
   }
