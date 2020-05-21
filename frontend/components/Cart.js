@@ -5,6 +5,7 @@ import { adopt } from 'react-adopt';
 
 import User from './User';
 import CartItem from './CartItem';
+import TakeMyMoney from './TakeMyMoney';
 
 import CartStyles from './styles/CartStyles';
 import CloseButton from './styles/CloseButton';
@@ -48,8 +49,8 @@ const Cart = () => (
             </CloseButton>
             <Supreme>{me.name}'s Cart</Supreme>
             <p>
-              You Have {me.cart.length} Item{me.cart.length === 1 ? '' : 's'} in
-              your cart.
+              You have {me.cart.length} item{me.cart.length === 1 ? '' : 's'} in
+              your cart
             </p>
           </header>
           <ul>
@@ -59,7 +60,11 @@ const Cart = () => (
           </ul>
           <footer>
             <p>{formatMoney(calcTotalPrice(me.cart))}</p>
-            <SickButton>Checkout</SickButton>
+            {me.cart.length > 0 && (
+              <TakeMyMoney>
+                <SickButton>Checkout</SickButton>
+              </TakeMyMoney>
+            )}
           </footer>
         </CartStyles>
       );
