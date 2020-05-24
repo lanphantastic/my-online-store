@@ -43,7 +43,7 @@ const Pagination = props => (
             </a>
           </Link>
           <p>
-            Page {props.page} of {pages}!
+            Page {props.page} of <span className="totalPages">{pages}</span>!
           </p>
           <p>{count} Items Total</p>
           <Link
@@ -53,7 +53,7 @@ const Pagination = props => (
               query: { page: page + 1 },
             }}
           >
-            <a className="prev" aria-disabled={page >= pages}>
+            <a className="next" aria-disabled={page >= pages}>
               Next →
             </a>
           </Link>
