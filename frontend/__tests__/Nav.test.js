@@ -36,7 +36,7 @@ const signInMocksWithCartItems = [
       data: {
         me: {
           ...fakeUser(),
-          cart: [fakeCartItem(), fakeCartItem(), fakeCartItem()]
+          cart: [fakeCartItem(), fakeCartItem(), fakeCartItem()],
         },
       },
     },
@@ -70,18 +70,18 @@ describe('<Nav />', () => {
     // console.log(wrapper.debug());
     expect(nav.children().length).toBe(6);
     // Make sure it show 6 Links, which are the Shop, Sell, Orders, Account, Sign Out and My Cart.
-
   });
 
   it('renders the amount of items in the cart', async () => {
     const wrapper = mount(
       <MockedProvider mocks={signInMocksWithCartItems}>
         <Nav />
-      </MockedProvider>
-    )
+      </MockedProvider>,
+    );
     await wait();
     wrapper.update();
-    const nav =wrapper.find('ul[data-test="nav"]');
-  })
-
+    const nav = wrapper.find('ul[data-test="nav"]');
+    const count = nav.find('.count');
+    expect(toJSON(count)).toMatchSnapshot();
+  });
 });
