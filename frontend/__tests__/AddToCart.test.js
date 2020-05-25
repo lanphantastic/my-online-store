@@ -57,7 +57,7 @@ describe('<AddToCart/>', () => {
     expect(toJSON(wrapper.find('button'))).toMatchSnapshot();
   });
 
-  it.only('adds an item to cart when clicked', async () => {
+  it('adds an item to cart when clicked', async () => {
     let apolloClient;
     const wrapper = mount(
       <MockedProvider mocks={mocks}>
