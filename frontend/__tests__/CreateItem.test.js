@@ -32,7 +32,7 @@ describe('<CreateItem />', () => {
     const wrapper = mount(
       <MockedProvider>
         <CreateItem />
-      </MockedProvider>
+      </MockedProvider>,
     );
     const input = wrapper.find('input[type="file"]');
     input.simulate('change', { target: { files: ['fakedog.jpg'] } });
@@ -42,5 +42,31 @@ describe('<CreateItem />', () => {
     expect(component.state.largeImage).toEqual(dogImage);
     expect(global.fetch).toHaveBeenCalled();
     global.fetch.mockReset();
+  });
+
+  it('handles state updating', async () => {
+    const wrapper = mount(
+      <MockedProvider>
+        <CreateItem />
+      </MockedProvider>,
+    );
+    wrapper
+      .find('#title')
+      .simulate('change', { target: { value: 'Testing', name: 'title' } });
+    wrapper
+      .find('#price')
+      .simulate('change', {
+        target: { value: 50000, name: 'price', type: 'number' },
+      });
+    wrapper
+      .find('#description')
+      .simulate('change', {
+        target: { value: 'This is a really nice item', name: 'description' },
+      });
+    expect(wrapper.find('CreateItem').instance().state).toMatchObject({
+      title: 'Testing',
+      price: 50000,
+      description: 'This is a really nice item',
+    });
   });
 });
