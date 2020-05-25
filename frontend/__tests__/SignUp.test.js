@@ -82,7 +82,7 @@ describe('<Signup />', () => {
     await wait();
     // user the user out of the apollo client
     const user = await apolloClient.query({query: CURRENT_USER_QUERY})
-    console.log(user);
+    // console.log(user);
     expect(user.data.me).toMatchObject(me);
     // console.log(apolloClient);
   });
