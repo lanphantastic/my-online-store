@@ -28,7 +28,7 @@ class RemoveFromCart extends React.Component {
   static propTypes = {
     id: PropTypes.string.isRequired,
   };
-  
+
   // This gets called as soon as we get a response back from the server after a mutation has been performed
   update = (cache, payload) => {
     // 1. first read the cache
@@ -71,3 +71,4 @@ class RemoveFromCart extends React.Component {
 }
 
 export default RemoveFromCart;
+export { REMOVE_FROM_CART_MUTATION };
