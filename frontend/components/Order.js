@@ -44,7 +44,7 @@ class Order extends Component {
           const order = data.order;
           console.log(order.createdAt);
           return (
-            <OrderStyles>
+            <OrderStyles data-test="order">
               <Head>
                 <title>Sick Fits - Order {order.id}</title>
               </Head>
@@ -58,7 +58,10 @@ class Order extends Component {
               </p>
               <p>
                 <span>Date: </span>
-                <span>{format(order.createdAt, 'ddd, MMM DD, YYYY')} at {format(order.createdAt,'h:mm:ss a (Z)')}</span>
+                <span>
+                  {format(order.createdAt, 'ddd, MMM DD, YYYY')} at{' '}
+                  {format(order.createdAt, 'h:mm:ss a (Z)')}
+                </span>
               </p>
               <p>
                 <span>Order Total: </span>
@@ -91,3 +94,4 @@ class Order extends Component {
 }
 
 export default Order;
+export { SINGLE_ORDER_QUERY };
